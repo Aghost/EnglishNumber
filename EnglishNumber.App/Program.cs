@@ -14,7 +14,7 @@ namespace EnglishNumber.App
             if (args.Length > 0 && int.TryParse(args[0], out int number)) {
                 WriteLine(Convert(number));
             } else {
-                WriteLine("not a number.");
+                WriteLine("not a number or number too large.");
             }
         }
 

@@ -15,7 +15,9 @@ namespace Numbers.Lib
         };
 
         public static Dictionary<int, string> NumbersToPlace = new Dictionary<int, string> {
-            {100, "Hundred "}, {1000, "Thousand, "}, {1000000, "Million, "}, {1000000000, "Billion, "}
+            {1000, "Thousand "},
+            {1000000, "Million "},
+            {1000000000, "Billion "}
         };
 
 
@@ -35,6 +37,8 @@ namespace Numbers.Lib
             if (n > 100 && n % 100 >= 1) {
                 res = "and " + res;
             }
+
+            res = ConvertToDigit((n / 100 % 10), "Hundred ") + res;
 
             foreach (var kvp in NumbersToPlace) {
                 res = ConvertToDigit((n / kvp.Key % 100), kvp.Value) + res;
