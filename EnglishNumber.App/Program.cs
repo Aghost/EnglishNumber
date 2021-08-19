@@ -1,6 +1,6 @@
 ﻿using System;
 using static System.Console;
-using static EnglishNumber.Lib.NumbersToEnglish;
+using static Numbers.Lib.ToEnglish;
 
 namespace EnglishNumber.App
 {

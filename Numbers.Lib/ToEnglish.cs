@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EnglishNumber.Lib
+namespace Numbers.Lib
 {
-    public static class NumbersToEnglish
+    public static class ToEnglish
     {
-        public static string[] EnglishDigits = new string[] {
+        public static string[] Digits = new string[] {
             "", "One ", "Two ", "Three ", "Four ", "Five ", "Six ", "Seven ", "Eight ", "Nine ", "Ten ",
             "Eleven ", "Twelve ", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"
         };
 
-        public static string[] EnglishTens = new string[] {
+        public static string[] Tens = new string[] {
             "", "", "Twenty ", "Thirty ", "Forty ", "Fifty ", "Sixty ", "Seventy ", "Eighty ", "Ninety "
         };
 
@@ -24,7 +24,7 @@ namespace EnglishNumber.Lib
                 return "";
             }
 
-            return n > 19 ? EnglishTens[n / 10] + EnglishDigits[n % 10] + _suffix : EnglishDigits[n] + _suffix;
+            return n > 19 ? Tens[n / 10] + Digits[n % 10] + _suffix : Digits[n] + _suffix;
         }
 
         public static string Convert(int n) {

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\EnglishNumber.Lib\EnglishNumber.Lib.csproj" />
+    <ProjectReference Include="..\Numbers.Lib\Numbers.Lib.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
