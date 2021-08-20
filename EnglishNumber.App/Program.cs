@@ -7,9 +7,7 @@ namespace EnglishNumber.App
     class Program
     {
         static void Main(string[] args) {
-            /*
-                Tests();
-            */
+            /* Tests(); */
 
             if (args.Length > 0 && int.TryParse(args[0], out int number)) {
                 WriteLine(Convert(number));
@@ -19,7 +17,9 @@ namespace EnglishNumber.App
         }
 
         static void Tests() {
-            int[] values = new int[] { 1, 19, 99, 999, 1999, 19345, 123456, 12345678, 1234567890 };
+            int[] values = new int[] {
+                1, 11, 111, 1111, 11111, 111111, 1111111, 11111111
+            };
 
             foreach (int i in values) {
                 WriteLine($"{i} = {Convert(i)}");

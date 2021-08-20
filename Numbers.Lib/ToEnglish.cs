@@ -16,6 +16,7 @@ namespace Numbers.Lib
 
         public static Dictionary<int, string> NumbersToPlace = new Dictionary<int, string> {
             {1000, "Thousand "},
+            {100000, "Hundred Thousand "},
             {1000000, "Million "},
             {1000000000, "Billion "}
         };
