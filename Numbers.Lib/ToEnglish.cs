@@ -1,51 +1,117 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 
 namespace Numbers.Lib
 {
     public static class ToEnglish
     {
-        public static string[] Digits = new string[] {
-            "", "One ", "Two ", "Three ", "Four ", "Five ", "Six ", "Seven ", "Eight ", "Nine ", "Ten ",
-            "Eleven ", "Twelve ", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"
+        public static readonly string[] Singles = new string[] {
+            "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"
         };
 
-        public static string[] Tens = new string[] {
-            "", "", "Twenty ", "Thirty ", "Forty ", "Fifty ", "Sixty ", "Seventy ", "Eighty ", "Ninety "
+        public static readonly string[] Teens = new string[] {
+            "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"
         };
 
-        public static Dictionary<int, string> NumbersToPlace = new Dictionary<int, string> {
-            {1000, "Thousand "},
-            {100000, "Hundred Thousand "},
-            {1000000, "Million "},
-            {1000000000, "Billion "}
+        public static readonly string[] Tens = new string[] {
+            "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
         };
 
-
-        public static string ConvertToDigit(int n, string _suffix) {
-            if (n == 0) {
+        public static string ConvertToDigit(long n) {
+            if (n <= 0) 
                 return "";
+
+            StringBuilder sb = new();
+
+            long left_to_write = n;
+            long write_now = 0;
+
+            //QUANTILLIONS
+            write_now = left_to_write / 1000000000000000000;
+            left_to_write = left_to_write - write_now * 1000000000000000000;
+
+            if (write_now > 0) {
+                sb.Append($"{ConvertToDigit(write_now)} Quintillion ");
             }
 
-            return n > 19 ? Tens[n / 10] + Digits[n % 10] + _suffix : Digits[n] + _suffix;
-        }
+            //QUADRILLIONS
+            write_now = left_to_write / 1000000000000000;
+            left_to_write = left_to_write - write_now * 1000000000000000;
 
-        public static string Convert(int n) {
-            string res;
-
-            res = ConvertToDigit(n % 100, "");
-
-            if (n > 100 && n % 100 >= 1) {
-                res = "and " + res;
+            if (write_now > 0) {
+                sb.Append($"{ConvertToDigit(write_now)} Quadrillion ");
             }
 
-            res = ConvertToDigit((n / 100 % 10), "Hundred ") + res;
+            //TRILLIONS
+            write_now = left_to_write / 1000000000000;
+            left_to_write = left_to_write - write_now * 1000000000000;
 
-            foreach (var kvp in NumbersToPlace) {
-                res = ConvertToDigit((n / kvp.Key % 100), kvp.Value) + res;
+            if (write_now > 0) {
+                sb.Append($"{ConvertToDigit(write_now)} Trillion ");
             }
 
-            return res;
+            //BILLIONS
+            write_now = left_to_write / 1000000000;
+            left_to_write = left_to_write - write_now * 1000000000;
+
+            if (write_now > 0) {
+                sb.Append($"{ConvertToDigit(write_now)} Billion ");
+            }
+
+            //MILLIONS
+            write_now = left_to_write / 1000000;
+            left_to_write = left_to_write - write_now * 1000000;
+
+            if (write_now > 0) {
+                sb.Append($"{ConvertToDigit(write_now)} Million ");
+            }
+
+            //THOUSANDS
+            write_now = left_to_write / 1000;
+            left_to_write = left_to_write - write_now * 1000;
+
+            if (write_now > 0) {
+                sb.Append($"{ConvertToDigit(write_now)} Thousand ");
+            }
+
+            //HUNDREDS
+            write_now = left_to_write / 100;
+            left_to_write = left_to_write - write_now * 100;
+
+            if (write_now > 0) {
+                sb.Append($"{ConvertToDigit(write_now)} Hundred ");
+                if (left_to_write > 0) {
+                    sb.Append("and ");
+                }
+            }
+
+            //TENS
+            write_now = left_to_write / 10;
+            left_to_write = left_to_write - write_now * 10;
+
+            if (write_now > 0) {
+                if (write_now == 1 && left_to_write > 0) {
+                    sb.Append(Teens[left_to_write -1]);
+                    left_to_write = 0;
+                } else {
+                    sb.Append(Tens[write_now -1]);
+                }
+
+                if (left_to_write > 0) {
+                    sb.Append("-");
+                }
+            }
+
+            //ONES
+            write_now = left_to_write;
+            left_to_write = 0;
+
+            if (write_now > 0) {
+                sb.Append(Singles[write_now -1]);
+            }
+
+            return sb.ToString();
         }
     }
 }
