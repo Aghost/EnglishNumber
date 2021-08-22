@@ -40,13 +40,8 @@ namespace EnglishNumber.App
         }
 
         private static string process_triplets(int x, int y, int z, int counter) {
-            string unitname = UnitNames[counter];
-
-            if (counter < 2) {
-                return x == 0 ? $"{process_doubles(y, z)} {unitname} " : $"{Singles[x]}-Hundred {process_doubles(y, z)} {unitname} ";
-            }
-
-            return x == 0 ? $"{process_doubles(y, z)}{unitname} " : $"{Singles[x]}-Hundred {process_doubles(y, z)} {unitname} ";
+            return x == 0 ? $"{process_doubles(y, z)} {UnitNames[counter]} " :
+                $"{Singles[x]}-Hundred {process_doubles(y, z)} {UnitNames[counter]} ";
         }
 
         private static string process_doubles(int x, int y) {
