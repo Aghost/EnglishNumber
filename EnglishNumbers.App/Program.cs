@@ -19,7 +19,7 @@ namespace EnglishNumber.App
                                                                     "Quadrillion", "Septicillion" };
 
         static void Main(string[] args) {
-            if (args.Length > 0 && long.TryParse(args[0], out long ln)) {
+            if (args.Length > 0 && ulong.TryParse(args[0], out ulong ln)) {
                 char[] numbers = ln.ToString().ToCharArray();
                 Array.Reverse(numbers);
                 int counter = (numbers.Length - 1) / 3;
