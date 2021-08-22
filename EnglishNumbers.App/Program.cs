@@ -16,7 +16,7 @@ namespace EnglishNumber.App
                                                                 "Fifty", "Sixty", "Seventy", "Eighty", "Ninety", };
 
         public static readonly string[] UnitNames = new string[] { "", "Thousand", "Million", "Billion", "Trillion",
-                                                                    "Quadrillion", "Septillion" };
+                                                                    "Quadrillion", "Quintillion" };
 
         static void Main(string[] args) {
             if (args.Length > 0 && ulong.TryParse(args[0], out ulong ln)) {
