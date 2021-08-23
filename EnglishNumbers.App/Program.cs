@@ -11,8 +11,18 @@ namespace EnglishNumber.App
             if (args.Length > 0) {
                 WriteLine(NumberToEnglish(args[0]));
             } else {
-                WriteLine("No args...");
+                WriteLine("No args... running tests");
+                Test();
             }
+        }
+
+        static void Test() {
+            string[] stray = new string[] {
+                "1", "10", "123", "12345", "123456", "1234567", "123456789", "1234567891011121314151617181920"
+            };
+
+            foreach (string str in stray)
+                WriteLine($"\n{str}\n{NumberToEnglish(str)}");
         }
     }
 }
