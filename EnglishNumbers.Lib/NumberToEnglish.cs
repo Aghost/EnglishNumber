@@ -8,7 +8,7 @@ namespace EnglishNumber.Lib
         private static readonly string[] Singles = new string[] { "", "One", "Two", "Three", "Four",
                                                                 "Five", "Six", "Seven", "Eight", "Nine" };
 
-        private static readonly string[] Teens = new string[] { "", "Eleven", "Twelve", "Thirteen", "Fourteen",
+        private static readonly string[] Teens = new string[] { "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen",
                                                                 "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
 
         private static readonly string[] Tens = new string[] { "", "Ten", "Twenty", "Thirty", "Forty",
