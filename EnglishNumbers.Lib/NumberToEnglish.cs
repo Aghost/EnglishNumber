@@ -31,16 +31,15 @@ namespace EnglishNumber.Lib
 
             int[] tmp = new int[] { 0, 0, 0 };
 
-            /*
             for (int i = digits_index; i >= 0; i--) {
                 tmp[i % 3] = digits[digits_index - i] - 48; // % 10; // To make it input Character safe
 
-                if (i % 3 == 2) {
-                    sb.Append(process_triplet(tmp[0], tmp[1], tmp[2], unitscounter--));
+                if (i % 3 == 0) {
+                    sb.Append(process_triplet(tmp[2], tmp[1], tmp[0], unitscounter--));
                 }
             }
-            */
 
+            /*
             for (int i = 0; i < digits.Length; i++) {
                 tmp[i % 3] = digits[i] - 48;
 
@@ -48,6 +47,7 @@ namespace EnglishNumber.Lib
                     sb.Append(process_triplet(tmp[0], tmp[1], tmp[2], unitscounter--));
                 }
             }
+            */
 
             return sb.ToString();
         }
