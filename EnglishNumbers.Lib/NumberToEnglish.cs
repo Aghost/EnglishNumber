@@ -21,26 +21,40 @@ namespace EnglishNumber.Lib
                                                                     "Novemdecillion", "Vigintillion" };
 
         public static string NumberToEnglish(string str) {
-            char[] numbers = str.ToCharArray();
-            int strlen = numbers.Length - 1;
-            int counter = strlen / 3;
-            int[] tmp = new int[] { 0, 0, 0 };
+            char[] digits = str.ToCharArray();
+            if (digits[0] == '0') return "no fractions!";
+
+            int digits_index = digits.Length - 1;
+            int unitscounter = digits_index / 3;
+
             StringBuilder sb = new();
 
-            for (int i = strlen; i >= 0; i--) {
-                tmp[i % 3] = (numbers[strlen - i] - 48); // % 10; // To make it input Character safe
+            int[] tmp = new int[] { 0, 0, 0 };
 
-                if (i % 3 == 0) {
-                    sb.Append(process_triplets(tmp[2], tmp[1], tmp[0], counter--));
+            /*
+            for (int i = digits_index; i >= 0; i--) {
+                tmp[i % 3] = digits[digits_index - i] - 48; // % 10; // To make it input Character safe
+
+                if (i % 3 == 2) {
+                    sb.Append(process_triplet(tmp[0], tmp[1], tmp[2], unitscounter--));
                 }
-            };
+            }
+            */
 
-            return sb.ToString();;
+            for (int i = 0; i < digits.Length; i++) {
+                tmp[i % 3] = digits[i] - 48;
+
+                if (i % 3 == 2) {
+                    sb.Append(process_triplet(tmp[0], tmp[1], tmp[2], unitscounter--));
+                }
+            }
+
+            return sb.ToString();
         }
 
-        private static string process_triplets(int x, int y, int z, int counter) {
-            return x == 0 ?  $"{process_doubles(y, z)} {UnitNames[counter]} " :
-                $"{Singles[x]} Hundred {process_doubles(y, z)} {UnitNames[counter]} ";
+        private static string process_triplet(int x, int y, int z, int uc) {
+            return x == 0 ?  $"{process_doubles(y, z)} {UnitNames[uc]} " :
+                $"{Singles[x]} Hundred {process_doubles(y, z)} {UnitNames[uc]} ";
         }
 
         private static string process_doubles(int x, int y) {
