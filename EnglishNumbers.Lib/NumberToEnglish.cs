@@ -22,6 +22,42 @@ namespace EnglishNumber.Lib
 
         public static string NumberToEnglish(string str) {
             char[] digits = str.ToCharArray();
+            int digits_index = digits.Length - 1;
+            int units_counter = digits_index / 3;
+
+            Console.WriteLine($"{digits_index} {units_counter}");
+            if (digits[0] == '0' || units_counter > UnitNames.Length) { return "Input error!"; }
+
+            StringBuilder sb = new();
+            int[] char_buffer = new int[] { 0,0,0 };
+
+            for (int i = digits_index; i >= 0; i--) {
+                char_buffer[i % 3] = digits[digits_index - i] - 48; // % 10; // To make it input Character safe
+
+                if (i % 3 == 0) {
+                    sb.Append(process_triplet(char_buffer[2], char_buffer[1], char_buffer[0], units_counter--));
+                }
+            }
+
+            return sb.ToString();
+        }
+
+        private static string process_triplet(int x, int y, int z, int uc) {
+            if (x == 0) {
+                return $"{process_doubles(y, z)} {UnitNames[uc]} ";
+            } else {
+                return $"{Singles[x]} Hundred {process_doubles(y, z)} {UnitNames[uc]} ";
+            }
+        }
+
+        private static string process_doubles(int x, int y) {
+            return x == 1 ? Teens[y] : $"{Tens[x]}{Singles[y]}";
+        }
+
+    }
+}
+        /* public static string NumberToEnglish(string str) {
+            char[] digits = str.ToCharArray();
             if (digits[0] == '0') return "no fractions!";
 
             int digits_index = digits.Length - 1;
@@ -39,7 +75,6 @@ namespace EnglishNumber.Lib
                 }
             }
 
-            /*
             for (int i = 0; i < digits.Length; i++) {
                 tmp[i % 3] = digits[i] - 48;
 
@@ -47,19 +82,7 @@ namespace EnglishNumber.Lib
                     sb.Append(process_triplet(tmp[0], tmp[1], tmp[2], unitscounter--));
                 }
             }
-            */
 
             return sb.ToString();
         }
-
-        private static string process_triplet(int x, int y, int z, int uc) {
-            return x == 0 ?  $"{process_doubles(y, z)} {UnitNames[uc]} " :
-                $"{Singles[x]} Hundred {process_doubles(y, z)} {UnitNames[uc]} ";
-        }
-
-        private static string process_doubles(int x, int y) {
-            return x == 1 ? Teens[y] : $"{Tens[x]}{Singles[y]}";
-        }
-
-    }
-}
+            */
